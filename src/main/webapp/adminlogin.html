@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        div.lead img {
+            width: 60px;
+            height: 60px;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        div.lead div span {
+            color: dimgray;
+        }
+
+        div.lead div a:hover {
+            cursor: pointer;
+        }
+
+        div.lead div a {
+            text-decoration: none;
+        }
+
+        div.lead div a span:hover {
+            color: black;
+        }
+
+        a {
+            cursor: pointer;
+        }
+
+        .red {
+            color: red;
+        }
+
+        .green {
+            color: green;
+        }
+    </style>
+    <link href="css/bootstrap.css" type="text/css" rel="stylesheet">
+    <script src="js/jquery-3.2.1.js" type="text/javascript"></script>
+    <script src="js/bootstrap.min.js" type="text/javascript"></script>
+</head>
+<body>
+<div class="container">
+    <div class="lead">
+        <img src="img/书城logo.jpg">
+        <div class="visible-lg-inline-block">
+            <span class="">传智书城</span>
+        </div>
+        <div style="float: right" id="showUser">
+            <a class="glyphicon" onclick="exit()"><span>用户退出</span></a><br>
+            <span>欢迎您：<span id="user_name"></span>&nbsp;&nbsp;管理员</span>
+        </div>
+    </div>
+    <ul class="nav nav-pills" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="pill" href="#home">图书销售情况</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="pill" href="#menu1">编辑推荐榜单</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="pill" href="#menu2">查询用户消费清单</a>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="home" class="container tab-pane active"><br>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>图书编号</th>
+                    <th>图书名</th>
+                    <th>作者</th>
+                    <th>图书类型</th>
+                    <th>库存</th>
+                    <th>已售</th>
+                    <th>价格</th>
+                    <th>总售价</th>
+                </tr>
+                </thead>
+                <tbody id="tb1">
+
+                </tbody>
+            </table>
+            <!--<button id="btnFirst" onclick="showByPage(3)">首页</button>-->
+            <!--<button id="btnFront" onclick="showByPage(2)">上一页</button>-->
+            <!--<button id="btnNext" onclick="showByPage(1)">下一页</button>-->
+            <!--<button id="btnLast" onclick="showByPage(4)">末页</button>-->
+        </div>
+        <div id="menu1" class="container tab-pane fade"><br>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>图书编号</th>
+                    <th>图书名</th>
+                    <th>作者</th>
+                    <th>图书类型</th>
+                    <th>库存</th>
+                    <th>已售</th>
+                    <th>价格</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody id="tb2">
+
+                </tbody>
+            </table>
+        </div>
+        <div id="menu2" class="container tab-pane fade"><br>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>用户账号</th>
+                    <th>订单编号</th>
+                    <th>订单总额</th>
+                    <th>用户剩余额度</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody id="tb3">
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="js/jquery-3.2.1.js"></script>
+<script type="text/javascript" src="js/layer/layer.js"></script>
+<script type="text/javascript">
+    $(function () {
+
+        showByPage();
+        $.post("showName.action", function (data) {
+            $("#user_name").text(data);
+        }, "text");
+        showAllBook()
+
+
+    })
+
+    function exit() {
+        layer.confirm("确定要退出账号吗？", {btn: ['退出', '再等等']}, function () {
+            $.post("exit.action", function () {
+                location.href = "login.html";
+            })
+        })
+    }
+
+    function showByPage() {
+        $("#tb1").empty();
+        $.post("showByHot.action", function (data) {
+            //console.log(data)
+            $.each(data.result, function (index, obj) {
+
+                var tr = $("<tr></tr>");
+                var bid = $("<td></td>").text(obj.bid);
+                var bname = $("<td></td>").text(obj.bname);
+                var author = $("<td></td>").text(obj.author);
+                var type = $("<td></td>").text(obj.tname);
+                var kucun = $("<td></td>").text(obj.kucun);
+                var sold = $("<td></td>").text(obj.sold);
+                var price = $("<td></td>").text(obj.price);
+                var add = $("<td></td>").text(obj.price * obj.sold);
+                tr.append(bid).append(bname).append(author).append(type).append(kucun).append(sold).append(price).append(add);
+                $("#tb1").append(tr);
+
+            })
+        }, "json");
+    }
+
+
+    function showAllBook() {
+        $("#tb2").empty();
+        $.post("showByType.action", {}, function (data) {
+            $.each(data.result, function (index, obj) {
+                //console.log(obj)
+                var tr = $("<tr></tr>");
+                var bid = $("<td></td>").text(obj.bid);
+                var tname = $("<td></td>").text(obj.bname);
+                var author = $("<td></td>").text(obj.author);
+                var type = $("<td></td>").text(obj.tname);
+                var kucun = $("<td></td>").text(obj.kucun);
+                var sold = $("<td></td>").text(obj.sold);
+                var price = $("<td></td>").text(obj.price);
+                var tuijain = $("<td></td>");
+                if (obj.tuijian == 1) {
+                    var cut = $("<a class='green' onclick='removeTuiJian(this)'></a>").text("删除推荐")
+                } else {
+                    var cut = $("<a class='red' onclick='addTuiJian(this)'></a>").text("添加推荐")
+                }
+                tuijain.append(cut);
+                tr.append(bid).append(tname).append(author).append(type).append(kucun).append(sold).append(price).append(tuijain)
+                $("#tb2").append(tr);
+
+            })
+        }, "json");
+    }
+
+    function addTuiJian(ha) {
+        $.post("addTuiJian.action", {
+            bid: $(ha).parent().parent().children().eq(0).text()
+        }, function (data) {
+            if (data.code == 200) {
+                layer.msg(data.msg, {icon: 1, time: 1000}, function () {
+                    location.reload()
+                })
+            } else {
+                layer.msg(data.msg, {icon: 2, time: 1000})
+            }
+        }, "json")
+    }
+
+    function removeTuiJian(ba) {
+        $.getJSON("removeTuiJian.action", {
+            bid: $(ba).parent().parent().children().eq(0).text()
+        }, function (data) {
+            if (data.code == 200) {
+                layer.msg(data.msg, {icon: 2, time: 1000}, function () {
+
+                    location.reload()
+                })
+            } else {
+                layer.msg(data.msg)
+            }
+        })
+
+    }
+
+    function showSalling() {
+        $.post("",{},function () {
+
+        },"json");
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+</html>

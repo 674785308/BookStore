@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        div.lead img {
+            width: 60px;
+            height: 60px;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        div.lead div span {
+            color: dimgray;
+        }
+
+        div.lead div a:hover {
+            cursor: pointer;
+        }
+
+        div.lead div a {
+            text-decoration: none;
+        }
+
+        div.lead div a span:hover {
+            color: black;
+        }
+
+        #bodys {
+            height: 500px;
+            width: 300px;
+            background: skyblue;
+            position: relative;
+        }
+
+        #bodys h3 {
+            text-align: center;
+            position: absolute;
+            top: 30px;
+            left: 25px;
+        }
+
+        #bodys h4 {
+            text-align: center;
+            position: absolute;
+            top: 120px;
+            left: 60px;
+        }
+
+        #bodys h5 {
+            position: absolute;
+            bottom: 120px;
+            left: 60px;
+        }
+
+        .container ul {
+            position: absolute;
+            left: 600px;
+            top: 100px;
+        }
+
+        .container ul li {
+            padding: 10px;
+            font-size: 25px;
+        }
+
+        .container ul li span {
+            color: black;
+            font-size: 25px;
+        }
+
+        .container ul li a {
+            color: gray;
+            text-decoration: none;
+            font-size: 20px;
+        }
+
+        .container ul li a:hover {
+            cursor: pointer;
+        }
+    </style>
+    <link href="css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <div class="lead">
+        <img src="img/书城logo.jpg">
+        <div class="visible-lg-inline-block">
+            <span class="">传智书城</span>
+        </div>
+        <div style="float: right" id="showUser">
+            <a class="glyphicon glyphicon-shopping-cart"><span onclick="toCart()">购物车</span></a>
+            <a class="glyphicon" href="myAccount.html"><span>我的账户</span></a>
+            <a class="glyphicon" onclick="exit()"><span>用户退出</span></a><br>
+            <span>欢迎您：&nbsp;</span><span id="user_name"></span>
+
+        </div>
+    </div>
+    <div class="container">
+        <div id="bodys" class="visible-lg-inline-block">
+            <h3>《<span>ss</span>》</h3>
+            <h4>作者:<span>ss</span></h4>
+            <h5></h5>
+        </div>
+        <ul class="list-unstyled" style="display: inline-block">
+            <li>图书详细</li>
+            <li><span>图书名：《</span><a></a>》</li>
+            <li><span>作者：</span><a></a></li>
+            <li><span>图书类型：</span><a></a></li>
+            <li><span>库存：</span><a></a></li>
+            <li><span>已售：</span><a></a></li>
+            <li><span>价格：</span><a></a></li>
+            <li><a onclick="addBought()">添加购物车</a></li>
+        </ul>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="js/jquery-3.2.1.js"></script>
+<script type="text/javascript" src="js/layer/layer.js"></script>
+<script type="text/javascript">
+
+    $.post("showName.action", function (data) {
+        $("#user_name").text(data);
+
+    }, "text");
+
+    var uid;
+    $.ajax({
+        url: "showUid.action",
+        dataType: "text",
+        type: "post",
+        async: false,
+    }).done(function (data) {
+        console.log("data=" + data);
+        uid = data;
+    }).fail(function () {
+
+    });
+
+
+    var url = location.href;
+    var a = url.indexOf("=");
+    var id = url.substr(a + 1, 1);
+    $(function () {
+        $.post("showBookById.action", {bid: id}, function (data) {
+            //console.log(data)
+
+            if (data.code == 200) {
+                $.each(data.result, function (index, obj) {
+                    $("ul li a").eq(0).text(obj.bname);
+                    $("ul li a").eq(1).text(obj.author);
+                    $("ul li a").eq(2).text(obj.tname);
+                    $("ul li a").eq(3).text(obj.kucun);
+                    $("ul li a").eq(4).text(obj.sold);
+                    $("ul li a").eq(5).text(obj.price);
+                    $("h3 span").text(obj.bname);
+                    $("h4 span").text(obj.author)
+                })
+
+            } else {
+                layer.msg(data.msg)
+            }
+        }, "json")
+    })
+
+
+    function addBought() {
+
+
+        $.post("addBought.action", {bid: id, many: 1, uid: uid}, function (data) {
+            if (data.code == 200) {
+                layer.msg(data.msg, {icon: 1, time: 1000}, function () {
+                    location.href = "shoppingCart.html";
+                })
+            } else {
+                layer.msg("添加购物车失败", {icon: 2, time: 2000}, function () {
+
+                })
+            }
+        }, "json")
+    }
+
+    function toCart() {
+        location.href = "shoppingCart.html?uid=" + uid
+
+    }
+
+    function exit() {
+        layer.confirm("确定要退出账号吗", {btn: ['退出', '再等等']}, function () {
+            $.post("exit.action", function () {
+                location.href = "login.html"
+            })
+        })
+
+    }
+
+
+</script>
+
+
+</html>

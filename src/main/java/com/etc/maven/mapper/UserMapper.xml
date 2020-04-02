@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.etc.maven.dao.UserMapper" >
+
+
+<select id="login" parameterType="java.lang.String" resultType="com.etc.maven.domain.User">
+  SELECT  * FROM USER WHERE account = #{account}
+</select>
+
+  <insert id="signIn" parameterType="java.lang.String">
+    insert into user (account,password) values(#{account},#{password})
+  </insert>
+
+  <select id="showMyAccount" parameterType="java.lang.Integer" resultType="com.etc.maven.domain.User">
+    SELECT  * FROM USER WHERE uid = #{uid}
+  </select>
+
+  <update id="changeMyAccount" parameterType="java.lang.String">
+UPDATE USER SET PASSWORD = #{newPassword} WHERE account = #{account}
+  </update>
+
+  <select id="isMe" parameterType="java.lang.String" resultType="java.lang.String">
+    SELECT PASSWORD FROM USER WHERE account = #{account}
+  </select>
+
+  <update id="cutMoney" parameterType="java.util.Map">
+    update user set money = money-#{price} where uid = #{uid}
+  </update>
+  
+</mapper>

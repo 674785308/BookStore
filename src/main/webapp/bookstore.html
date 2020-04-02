@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="css/bootstrap.css" type="text/css">
+    <link rel="stylesheet" href="css/swiper.css">
+    <style type="text/css">
+        a:hover {
+            cursor: pointer;
+        }
+
+        div.lead img {
+            width: 60px;
+            height: 60px;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        div.lead div span {
+            color: dimgray;
+        }
+
+        div.lead div a:hover {
+            cursor: pointer;
+        }
+
+        div.lead div a {
+            text-decoration: none;
+        }
+
+        div.lead div a span:hover {
+            color: black;
+        }
+
+        #showUser > span {
+            font-size: 15px;
+        }
+
+        #heading_top ul li {
+            padding-left: 40px;
+            padding-right: 20px;
+            height: 40px;
+        }
+
+        #heading_top ul li a {
+            text-decoration: none;
+            color: white;
+        }
+
+        #heading_top ul a {
+            text-decoration: none;
+            font-size: 20px;
+            color: gray;
+            cursor: pointer;
+        }
+
+        #search {
+            width: 100%;
+            background: deepskyblue;
+            height: 50px;
+            position: relative;
+        }
+
+        #search input {
+            display: inline-block;
+            margin-top: 13px;
+            margin-right: 50px;
+            position: absolute;
+            right: 15%;
+        }
+
+        #search button {
+            border-radius: 10px;
+            position: absolute;
+            right: 15%;
+            margin-top: 13px;
+        }
+
+        #search span {
+            position: absolute;
+            right: 36%;
+            margin-top: 16px;
+        }
+
+        #middle {
+            position: relative;
+        }
+
+        #middle ul:nth-child(1) {
+            position: absolute;
+            left: 0;
+        }
+
+        #middle ul:nth-child(1) li {
+            font-size: 25px;
+            color: black;
+            margin-top: 10px;
+        }
+
+        #middle ul:nth-child(1) li a {
+            text-decoration: none;
+            font-size: 12px;
+            color: gray;
+        }
+
+        #middle ul:nth-child(1) li span {
+            font-size: 15px;
+            color: #3c3c3c;
+        }
+
+        #middle ul:last-child {
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+
+        #middle ul:last-child li {
+            font-size: 25px;
+            color: black;
+            margin-top: 10px;
+        }
+
+        #middle ul:last-child li a {
+            text-decoration: none;
+            font-size: 12px;
+            color: gray;
+        }
+
+        #middle ul:last-child li span {
+            font-size: 15px;
+            color: #3c3c3c;
+        }
+
+        #showAll span {
+            font-size: 20px;
+            color: grey;
+            cursor: pointer;
+        }
+
+        body {
+            background: white;
+            font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            color: #000;
+            margin: 0;
+            padding: 0;
+        }
+
+        .swiper-container {
+            width: 400px;
+            height: 400px;
+            right: 100px;
+            top: 50px;
+        }
+
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+
+        }
+
+        #lunbo1 {
+            background: url("img/timg1.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        #lunbo2 {
+            background: url("img/timg2.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        #lunbo3 {
+            background: url("img/u=1226355134,4228523173&fm=26&gp=0.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        #lunbo4 {
+            background: url("img/download.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        #lunbo5 {
+            background: url("img/u=3982410437,1163634901&fm=15&gp=0.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        table {
+            position: absolute;
+            left: 25%;
+            top: 20px;
+        }
+
+        .swiper-slide {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="lead">
+        <img src="img/书城logo.jpg">
+        <div class="visible-lg-inline-block">
+            <span class="">传智书城</span>
+        </div>
+        <div style="float: right" id="showUser">
+            <a class="glyphicon glyphicon-shopping-cart"><span onclick="toCart()">购物车</span></a>
+            <a class="glyphicon" href="myAccount.html"><span>我的账户</span></a>
+            <a class="glyphicon" onclick="exit()"><span>用户退出</span></a><br>
+            <span>欢迎您：&nbsp;</span><span id="user_name"></span>
+        </div>
+    </div>
+    <div id="heading_top" style="background: black">
+        <ul id="ul1" class="list-unstyled list-inline" style="color: white">
+            <li value="1"><a>古典</a></li>
+            <li value="2"><a>文学</a></li>
+            <li value="3"><a>玄幻</a></li>
+            <li value="4"><a>西方</a></li>
+            <li value="5"><a>武侠</a></li>
+            <li value="6"><a>学术</a></li>
+            <li value="7"><a>穿越</a></li>
+            <li value="8"><a>科幻</a></li>
+            <li value="9"><a>名著</a></li>
+            <li value="0" id="showAll"><span>全部商品目录</span></li>
+        </ul>
+    </div>
+    <div id="search">
+        <span>搜索:</span>
+        <input type="text" id="showByName" placeholder="请输入要搜索的书籍名称">
+        <button type="button" id="showName" class="btn-success">搜索</button>
+    </div>
+    <div id="middle">
+        <ul class="list-unstyled" id="middles">
+            <li>热门榜单</li>
+            <li><span></span><a onclick="showDetails($(this).parent().children().eq(0).text())">ssss</a></li>
+            <li><span></span><a onclick="showDetails($(this).parent().children().eq(0).text())">ssss</a></li>
+            <li><span></span><a onclick="showDetails($(this).parent().children().eq(0).text())">ssss</a></li>
+            <li><span></span><a onclick="showDetails($(this).parent().children().eq(0).text())">ssss</a></li>
+            <li><span></span><a onclick="showDetails($(this).parent().children().eq(0).text())">ssss</a></li>
+            <li><span></span><a onclick="showDetails($(this).parent().children().eq(0).text())">ssss</a></li>
+            <li><span></span><a onclick="showDetails($(this).parent().children().eq(0).text())">ssss</a></li>
+            <li><span></span><a onclick="showDetails($(this).parent().children().eq(0).text())">ssss</a></li>
+            <li><span></span><a onclick="showDetails($(this).parent().children().eq(0).text())">ssss</a></li>
+            <li><span></span><a onclick="showDetails($(this).parent().children().eq(0).text())">ssss</a></li>
+        </ul>
+        <table class="table table-striped" style="display: none">
+            <thead>
+            <tr>
+                <th>图书编号</th>
+                <th>图书名</th>
+                <th>作者</th>
+                <th>图书类型</th>
+                <th>库存</th>
+                <th>已售</th>
+                <th>价格</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+        <div id="swiper" class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide" onclick="showDetails(6)" id="lunbo1"></div>
+                <div class="swiper-slide" onclick="showDetails(4)" id="lunbo2"></div>
+                <div class="swiper-slide" onclick="showDetails(3)" id="lunbo3"></div>
+                <div class="swiper-slide" onclick="showDetails(11)" id="lunbo4"></div>
+                <div class="swiper-slide" onclick="showDetails(9)" id="lunbo5"></div>
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+        <ul class="list-unstyled" id="tuijian">
+            <li>编剧推荐</li>
+            <li><span>1</span><a onclick="showDetails($(this).parent().children().eq(0).text())">暂未添加</a></li>
+            <li><span>1</span><a onclick="showDetails($(this).parent().children().eq(0).text())">暂未添加</a></li>
+            <li><span>1</span><a onclick="showDetails($(this).parent().children().eq(0).text())">暂未添加</a></li>
+            <li><span>1</span><a onclick="showDetails($(this).parent().children().eq(0).text())">暂未添加</a></li>
+            <li><span>1</span><a onclick="showDetails($(this).parent().children().eq(0).text())">暂未添加</a></li>
+            <li><span>1</span><a onclick="showDetails($(this).parent().children().eq(0).text())">暂未添加</a></li>
+            <li><span>1</span><a onclick="showDetails($(this).parent().children().eq(0).text())">暂未添加</a></li>
+            <li><span>1</span><a onclick="showDetails($(this).parent().children().eq(0).text())">暂未添加</a></li>
+            <li><span>1</span><a onclick="showDetails($(this).parent().children().eq(0).text())">暂未添加</a></li>
+            <li><span>1</span><a onclick="showDetails($(this).parent().children().eq(0).text())">暂未添加</a></li>
+        </ul>
+    </div>
+</div>
+</body>
+
+<script>
+    var myPlugin = {
+        name: 'debugger',
+        params: {
+            debugger: false,
+        },
+        on: {
+            init: function () {
+                if (!this.params.debugger) return;
+                console.log('init');
+            },
+            click: function (e) {
+                if (!this.params.debugger) return;
+                console.log('click');
+            },
+            tap: function (e) {
+                if (!this.params.debugger) return;
+                console.log('tap');
+            },
+            doubleTap: function (e) {
+                if (!this.params.debugger) return;
+                console.log('doubleTap');
+            },
+            sliderMove: function (e) {
+                if (!this.params.debugger) return;
+                console.log('sliderMove');
+            },
+            slideChange: function () {
+                if (!this.params.debugger) return;
+                console.log('slideChange', this.previousIndex, '->', this.activeIndex);
+            },
+            slideChangeTransitionStart: function () {
+                if (!this.params.debugger) return;
+                console.log('slideChangeTransitionStart');
+            },
+            slideChangeTransitionEnd: function () {
+                if (!this.params.debugger) return;
+                console.log('slideChangeTransitionEnd');
+            },
+            transitionStart: function () {
+                if (!this.params.debugger) return;
+                console.log('transitionStart');
+            },
+            transitionEnd: function () {
+                if (!this.params.debugger) return;
+                console.log('transitionEnd');
+            },
+            fromEdge: function () {
+                if (!this.params.debugger) return;
+                console.log('fromEdge');
+            },
+            reachBeginning: function () {
+                if (!this.params.debugger) return;
+                console.log('reachBeginning');
+            },
+            reachEnd: function () {
+                if (!this.params.debugger) return;
+                console.log('reachEnd');
+            },
+        },
+    };
+</script>
+
+<script>
+    Swiper.use(myPlugin);
+    var swiper = new Swiper('.swiper-container', {
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        debugger: true,
+    });
+</script>
+
+
+<script src="js/jquery-3.2.1.js" rel="script"></script>
+<script src="js/layer/layer.js" rel="script"></script>
+<script src="js/swiper.js"></script>
+<script rel="script">
+    var uid;
+    $(function () {
+        $.get("showName.action", function (data) {
+            $("#user_name").text(data)
+        }, "text");
+
+
+        $.ajax({
+            url:"showUid.action",
+            dataType:"text",
+            type:"post",
+            async:false,
+            success:function (data) {
+                uid = data
+            }
+        })
+
+        // $.ajax({
+        //     url:"showUid.action",
+        //     dataType:"text",
+        //     type:"post",
+        //     async:false,
+        // }).done(function (data) {
+        //     console.log("data="+data);
+        //     uid = data;
+        // }).fail(function () {
+        //
+        // });
+
+        $.post("hotTop10.action", function (data) {
+           // console.log(data)
+            if (data.code == 200){
+            $.each(data.result,function (index,obj) {
+                $("#middles li span").eq(index).text(obj.bid)
+                $("#middles li a").eq(index).text(obj.bname)
+            })
+            }else{}
+        }, "json")
+
+        // $("#heading_top ul li").children().click(function () {
+        //     location.href = "showBytid.html?tid=" + $(this).parent().val() + "&account=" + account;
+        //
+        // })
+
+        $("#showName").click(function () {
+            $.post("showBookByName.action",{
+                bname : $("#showByName").val()
+            },function (data) {
+                if (data.code == 200){
+                    $("#swiper").style.display = "none";
+                    $("#tboby").empty();
+                    $("table").css("display", "inline-block");
+                    $.each(data.result,function (index,book) {
+                        var tr = $("<tr></tr>");
+                        var bid = $("<td></td>").text(book.bid);
+                        var tname = $("<td></td>").text(book.bname);
+                        var author = $("<td></td>").text(book.author);
+                        var type = $("<td></td>").text(book.tname);
+                        var kucun = $("<td></td>").text(book.kucun);
+                        var sold = $("<td></td>").text(book.sold);
+                        var price = $("<td></td>").text(book.price);
+                        var add = $("<td></td>")
+                        var bought = $("<a onclick=''></a>").text("书籍详情");
+                        add.append(bought);
+                        tr.append(bid).append(tname).append(author).append(type).append(kucun).append(sold).append(price).append(add);
+                        $("tbody").append(tr);
+                    })
+
+                }
+            },"json");
+
+        })
+
+        $("#showByName").focus(function () {
+            var swiper = document.getElementById("swiper");
+            $("table").css("display", "none")
+            swiper.style.display = "flex";
+
+        })
+        showTuiJian()
+
+    })
+
+    function showDetails(bid) {
+        var url = location.href;
+        var arrUrl = url.indexOf("=");
+        var account = url.substring(arrUrl+1);
+        location.href = "showOneBook.html?bid=" + bid + "&account=" + account;
+    }
+
+    // function toCard() {
+    //     $.get("showName.action", function (data) {
+    //        var account = data;
+    //
+    //        location.href ="shoppingCart.html?accuont=" + account;
+    //     }, "text");
+    // }
+    function toCart() {
+        location.href = "shoppingCart.html?uid=" + uid
+
+    }
+
+    function exit() {
+        layer.confirm("确定要退出账号吗",{btn:["退出","再等等"]},function () {
+            $.post("exit.action",function () {
+                location.href = "login.html";
+            })
+        })
+    }
+
+    function showTuiJian() {
+        $.post("showTuiJian.action",function (data) {
+                //console.log(data)
+        if (data.code == 200){
+            $.each(data.result,function (index,book) {
+                // $("#tuijian li span").eq(index).text(book.tname + ":");
+                $("#tuijian li a").eq(index).text(book.bname);
+                $("#tuijian li span").eq(index).text(book.bid);
+            })
+        } else{
+
+        }
+        },"json")
+
+    }
+
+
+
+</script>
+</html>

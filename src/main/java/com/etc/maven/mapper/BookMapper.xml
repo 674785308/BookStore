@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.etc.maven.dao.BookMapper">
+
+    <!--<select id="showBook" parameterType="java.util.Map" resultType="java.util.Map">-->
+    <!--SELECT k.*,b.tname FROM book k,book_type b WHERE b.tid = k.tid-->
+    <!--<if test="b.tid!=null">-->
+    <!--and b.tid = #{tid}-->
+    <!--</if>-->
+    <!--<if test="k.bname != null">-->
+    <!--and k.bname = #{bname}-->
+    <!--</if>-->
+    <!--<if test="k.bid != null">-->
+    <!--and k.bid =#{bid}-->
+    <!--</if>-->
+    <!--</select>-->
+
+    <select id="showBookByType" parameterType="java.lang.Integer" resultType="java.util.Map">
+        select k.*,b.tname from book k,book_type b where b.tid = k.tid
+        <if test="tid!=null">
+            and k.tid = #{tid}
+        </if>
+    </select>
+
+    <select id="showBookByName" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT b.*,t.tname FROM book b ,book_type t WHERE b.tid = t.tid
+
+        <if test="author != null">
+            and b.author =#{author}
+        </if>
+        <if test="bname != null">
+            and b.bname like concat('%',#{bname},'%')
+        </if>
+
+    </select>
+
+    <select id="showBookById" parameterType="java.lang.Integer" resultType="java.util.Map">
+     SELECT k.*,b.tname FROM book k,book_type b WHERE b.tid = k.tid
+     <if test="bid!=null">
+         and k.bid = #{bid}
+     </if>
+    </select>
+
+    <select id="showByHot"  resultType="java.util.Map">
+      SELECT k.*,b.tname FROM book k,book_type b WHERE b.tid=k.tid ORDER BY  sold DESC
+    </select>
+
+    <insert id="addTuijian" parameterType="java.util.Map">
+    insert into tuijian(bid,who) values(#{bid},#{who})
+    </insert>
+
+    <delete id="removeTuiJian" parameterType="java.lang.Integer">
+        DELETE FROM tuijian WHERE bid = #{bid}
+    </delete>
+
+    <update id="updateTuiJian1" parameterType="java.lang.Integer">
+        UPDATE book SET tuijian = 1 WHERE bid = #{bid}
+    </update>
+    <update id="updateTuiJian0" parameterType="java.lang.Integer">
+        UPDATE book SET tuijian = 0 WHERE bid = #{bid}
+    </update>
+
+    <select id="hotTop10" resultType="java.util.Map">
+SELECT bid,bname,tname,sold FROM book,book_type WHERE book.tid=book_type.tid ORDER BY  sold DESC LIMIT 0,10
+    </select>
+
+    <select id="showTuiJian" resultType="java.util.Map">
+        SELECT b.bname,p.tname,b.bid FROM book b,book_type p,tuijian t WHERE b.tid=p.tid AND b.bid = t.bid;
+    </select>
+
+    <select id="selectPriceById" resultType="java.lang.Double" parameterType="java.lang.Integer">
+        select price from book where bid = #{bid}
+    </select>
+    <select id="getKucun" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select kucun from book where bid = #{bid}
+    </select>
+
+    <update id="setSoldKucun" parameterType="java.util.Map">
+        update book set kucun = kucun- #{many},sold=sold+ #{many} where bid = #{bid}
+    </update>
+
+</mapper>

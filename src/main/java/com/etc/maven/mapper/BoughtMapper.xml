@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.etc.maven.dao.BoughtMapper">
+
+    <insert id="addBought" parameterType="java.util.Map">
+  insert into salling(uid ,total) values(#{uid},#{price}*#{many})
+</insert>
+    <insert id="addBoughtDetails" parameterType="java.util.Map">
+insert into sallingdetail(cid,bid,many,much) values(#{cid},#{bid},#{many},#{price}*#{many})
+    </insert>
+
+    <select id="isHave" resultType="java.util.Map" parameterType="java.lang.Integer">
+        select * from salling where uid =#{uid} and issal=0
+    </select>
+
+    <select id="getCid" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select cid from salling where uid =#{uid} and issal=0
+    </select>
+    <update id="updataBoughtSal" parameterType="java.util.Map">
+    update salling set total = total+ #{price} * #{many} where cid = #{cid}
+    </update>
+
+    <select id="showMyCart" parameterType="java.lang.Integer" resultType="java.util.Map">
+  SELECT sa.cid,b.kucun,b.bid,s.many,s.much,b.bname,b.kucun,b.price FROM book b,sallingdetail s,salling sa WHERE s.bid = b.bid AND sa.issal=0 AND sa.cid = s.cid AND uid =#{uid}
+  </select>
+    <delete id="clearMyCart" parameterType="java.lang.Integer">
+        DELETE FROM salling WHERE uid = #{uid}
+    </delete>
+
+    <select id="priceEnough" parameterType="java.lang.Integer" resultType="java.lang.Double">
+        SELECT money FROM USER WHERE uid= #{uid}
+    </select>
+
+    <update id="updataBoughtSalDetail" parameterType="java.util.Map">
+update sallingdetail set much = #{price} * #{many},many = #{many} where cid = #{cid} and bid= #{bid}
+    </update>
+
+    <select id="showAllPrice" parameterType="java.lang.Integer" resultType="java.lang.Double">
+SELECT total from salling where uid = #{uid} and issal=0
+    </select>
+
+    <update id="changeIsSal" parameterType="java.lang.Integer">
+        UPDATE salling SET issal = 1 WHERE uid = #{uid}
+    </update>
+
+</mapper>
