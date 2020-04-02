@@ -370,18 +370,18 @@
 </script>
 
 <script>
-    Swiper.use(myPlugin);
-    var swiper = new Swiper('.swiper-container', {
-        pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-        },
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-        debugger: true,
-    });
+    // Swiper.use(myPlugin);
+    // var swiper = new Swiper('.swiper-container', {
+    //     pagination: {
+    //         el: '.swiper-pagination',
+    //         clickable: true,
+    //     },
+    //     navigation: {
+    //         nextEl: '.swiper-button-next',
+    //         prevEl: '.swiper-button-prev',
+    //     },
+    //     debugger: true,
+    // });
 </script>
 
 
@@ -428,10 +428,9 @@
             }else{}
         }, "json")
 
-        // $("#heading_top ul li").children().click(function () {
-        //     location.href = "showBytid.html?tid=" + $(this).parent().val() + "&account=" + account;
-        //
-        // })
+        $("#heading_top ul li ").children().click(function () {
+            location.href = "showBytid.html?tid="+$(this).parent().val()
+        })
 
         $("#showName").click(function () {
             $.post("showBookByName.action",{
