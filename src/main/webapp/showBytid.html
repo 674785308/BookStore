@@ -110,6 +110,19 @@
     console.log(tid)
 
     $(function () {
+    $.post("showByType.action",{tid:tid},function (data) {
+        $.each(data.result,function (index,obj) {
+            var bid = obj.bid;
+            var div = $("<div></div>");
+            var h3 = $("<h3></h3>").text(obj.bname);
+            var h4 = $("<h4></h4>").text("作者："+ obj.author);
+            var h5 = $("<h5></h5>").text("简介");
+            div.append(h3).append(h4).append(h5);
+            $("#bodys").append(div);
+        })
+    },"json")
+
+
 
     })
 

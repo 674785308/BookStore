@@ -15,9 +15,13 @@
     <!--</if>-->
     <!--</select>-->
 
+    <!--<if test="tid=0">-->
+        <!--and 1=1-->
+    <!--</if>-->
     <select id="showBookByType" parameterType="java.lang.Integer" resultType="java.util.Map">
         select k.*,b.tname from book k,book_type b where b.tid = k.tid
-        <if test="tid!=null">
+
+        <if test="tid!=null and tid!=0">
             and k.tid = #{tid}
         </if>
     </select>
