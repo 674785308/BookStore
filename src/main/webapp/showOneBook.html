@@ -141,7 +141,7 @@
 
     var url = location.href;
     var a = url.indexOf("=");
-    var id = url.substr(a + 1, 1);
+    var id = url.substring(a + 1);
     $(function () {
         $.post("showBookById.action", {bid: id}, function (data) {
             //console.log(data)

@@ -112,9 +112,9 @@
     $(function () {
     $.post("showByType.action",{tid:tid},function (data) {
         $.each(data.result,function (index,obj) {
-            var bid = obj.bid;
+            //var bid = obj.bid;
             var div = $("<div></div>");
-            var h3 = $("<h3></h3>").text(obj.bname);
+            var h3 = $("<h3 onclick='showDetails("+obj.bid+")'></h3>").text("《"+obj.bname+"》");
             var h4 = $("<h4></h4>").text("作者："+ obj.author);
             var h5 = $("<h5></h5>").text("简介");
             div.append(h3).append(h4).append(h5);
@@ -122,9 +122,26 @@
         })
     },"json")
 
-
-
     })
+
+
+    function showDetails(bid) {
+        location.href = "showOneBook.html?bid=" + bid
+    }
+
+    function toCart() {
+        location.href = "shoppingCart.html"
+    }
+    
+    function exit() {
+        layer.confirm("确定要退出账号吗",{btn:['退出','再等等']},function () {
+            $.post("exit.action"),function () {
+                location.href = "login.html"
+            }
+        })
+    }
+
+
 
 
 
