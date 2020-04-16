@@ -1,6 +1,5 @@
 package com.etc.maven.service;
 
-import com.etc.maven.domain.Book;
 import com.etc.maven.domain.TuiJian;
 import org.apache.ibatis.annotations.Param;
 
@@ -8,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 public interface BookService {
-   // List<Map<String,Object>> showBook(Map<String,Object> map);
 
     List<Map<String,Object>> showBookByType(Integer tid);
 
@@ -21,7 +19,6 @@ public interface BookService {
 
     int addTuijian(TuiJian tuiJian) throws Exception;
     int removeTuiJian(@Param("bid") Integer bid) throws Exception;
-  //  int updateTuiJian1( Integer bid);
 
     List<Map<String,Object>> hotTop10();
     List<Map<String,Object>> showTuiJian();

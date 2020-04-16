@@ -19,8 +19,6 @@ public class UserController extends BaseController {
     @RequestMapping("/login.action")
     public Map<String,Object> login(String account, String password, HttpSession session){
        User user = userService.login(account);
-//        System.out.println(account);
-//        System.out.println(password);
        resultmap.clear();
        if (user == null){
         resultmap.put("code",201);
@@ -93,8 +91,6 @@ public class UserController extends BaseController {
         int uid = ((User)(session.getAttribute("user"))).getUid();
         return uid;
     }
-
-
 
     @ResponseBody
     @RequestMapping("/changeMyAccount.action")

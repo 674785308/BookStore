@@ -9,7 +9,6 @@ public interface BoughtMapper {
 
     int addBought(Map<String, Object> param);
 
-
     int addBoughtDetails(Map<String, Object> param);
 
     Map<String, Object> isHave(Integer uid);

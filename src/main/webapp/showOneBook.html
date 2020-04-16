@@ -139,6 +139,7 @@
     });
 
 
+
     var url = location.href;
     var a = url.indexOf("=");
     var id = url.substring(a + 1);
@@ -166,7 +167,6 @@
 
 
     function addBought() {
-
 
         $.post("addBought.action", {bid: id, many: 1, uid: uid}, function (data) {
             if (data.code == 200) {
@@ -197,6 +197,9 @@
 
 
 </script>
+
+
+
 
 
 </html>

@@ -2,22 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.etc.maven.dao.BookMapper">
 
-    <!--<select id="showBook" parameterType="java.util.Map" resultType="java.util.Map">-->
-    <!--SELECT k.*,b.tname FROM book k,book_type b WHERE b.tid = k.tid-->
-    <!--<if test="b.tid!=null">-->
-    <!--and b.tid = #{tid}-->
-    <!--</if>-->
-    <!--<if test="k.bname != null">-->
-    <!--and k.bname = #{bname}-->
-    <!--</if>-->
-    <!--<if test="k.bid != null">-->
-    <!--and k.bid =#{bid}-->
-    <!--</if>-->
-    <!--</select>-->
-
-    <!--<if test="tid=0">-->
-        <!--and 1=1-->
-    <!--</if>-->
     <select id="showBookByType" parameterType="java.lang.Integer" resultType="java.util.Map">
         select k.*,b.tname from book k,book_type b where b.tid = k.tid
 

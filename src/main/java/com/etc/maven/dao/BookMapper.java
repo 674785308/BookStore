@@ -9,8 +9,6 @@ import java.util.Map;
 
 public interface BookMapper {
 
-    //List<Map<String,Object>>  showBook(Map<String,Object> map);
-
     List<Map<String,Object>> showBookByType(@Param("tid") Integer tid);
 
     List<Map<String,Object>> showBookByName(Map<String, Object> param);

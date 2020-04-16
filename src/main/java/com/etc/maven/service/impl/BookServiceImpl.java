@@ -1,7 +1,6 @@
 package com.etc.maven.service.impl;
 
 import com.etc.maven.dao.BookMapper;
-import com.etc.maven.domain.Book;
 import com.etc.maven.domain.TuiJian;
 import com.etc.maven.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 import java.util.Map;
@@ -17,11 +15,6 @@ import java.util.Map;
 public class BookServiceImpl implements BookService {
     @Autowired
     private BookMapper bookMapper;
-
-//    @Override
-//    public List<Map<String, Object>> showBook(Map<String, Object> map) {
-//        return bookMapper.showBook(map);
-//    }
 
     @Override
     public List<Map<String, Object>> showBookByType(Integer tid) {

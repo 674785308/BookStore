@@ -23,6 +23,7 @@ insert into sallingdetail(cid,bid,many,much) values(#{cid},#{bid},#{many},#{pric
     <select id="showMyCart" parameterType="java.lang.Integer" resultType="java.util.Map">
   SELECT sa.cid,b.kucun,b.bid,s.many,s.much,b.bname,b.kucun,b.price FROM book b,sallingdetail s,salling sa WHERE s.bid = b.bid AND sa.issal=0 AND sa.cid = s.cid AND uid =#{uid}
   </select>
+
     <delete id="clearMyCart" parameterType="java.lang.Integer">
         DELETE FROM salling WHERE uid = #{uid}
     </delete>
@@ -42,5 +43,9 @@ SELECT total from salling where uid = #{uid} and issal=0
     <update id="changeIsSal" parameterType="java.lang.Integer">
         UPDATE salling SET issal = 1 WHERE uid = #{uid}
     </update>
+
+
+
+
 
 </mapper>

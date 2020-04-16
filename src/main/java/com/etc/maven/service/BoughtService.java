@@ -1,8 +1,5 @@
 package com.etc.maven.service;
 
-import org.apache.ibatis.annotations.Param;
-import org.springframework.web.bind.annotation.RequestParam;
-
 import java.util.List;
 import java.util.Map;
 
@@ -10,7 +7,6 @@ public interface BoughtService {
     int addBought(Map<String, Object> param) throws Exception;
 
     int addBoughtDetails(Map<String, Object> param);
-
 
     Map<String, Object> isHave(Integer uid);
 
@@ -29,6 +25,10 @@ public interface BoughtService {
     Double showAllPrice(Integer uid);
 
     int changeIsSal(Integer uid);
+
+
+
+
 
 
 }

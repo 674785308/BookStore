@@ -88,18 +88,7 @@
 
     }, "text");
 
-    // var uid;
-    // $.ajax({
-    //     url: "showUid.action",
-    //     dataType: "text",
-    //     type: "post",
-    //     async: false,
-    // }).done(function (data) {
-    //     console.log("data=" + data);
-    //     uid = data;
-    // }).fail(function () {
-    //
-    // });
+
 
     var uid1;
     $.ajax({
@@ -146,6 +135,8 @@
 
     })
 
+
+
     function cut(a) {
         if ($(a).parent().children().eq(1).val() > 0) {
             $(a).parent().children().eq(1).val($(a).parent().children().eq(1).val() - 1);
@@ -153,6 +144,7 @@
         }
 
     }
+
     function addsome(a) {
         if ($(a).parent().children().eq(1).val() < parseInt($(a).parent().parent().children().eq(3).text())){
             $(a).parent().children().eq(1).val(parseInt($(a).parent().children().eq(1).val()) + 1);
@@ -186,12 +178,10 @@
                 } else{
                     layer.msg("清空购物车成功",{icon:1,time:1000});
                     location.reload();
-
                 }
             },"json")
         }
     })
-
 
     
     $("#btn_buy").click(function () {
@@ -225,26 +215,7 @@
         })
 
 
-
-
         })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     function exit() {

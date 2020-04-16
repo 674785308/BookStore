@@ -78,8 +78,6 @@ public class BookController extends BaseController {
         return resultmap;
     }
 
-
-
     @ResponseBody
     @RequestMapping("/showBookById.action")
     public Map<String,Object> showBookById(Integer bid){
@@ -95,6 +93,7 @@ public class BookController extends BaseController {
        }
        return resultmap;
     }
+
 
     @ResponseBody
     @RequestMapping("/showByHot.action")
@@ -182,7 +181,6 @@ public class BookController extends BaseController {
 //           resultmap.put("msg","fail");
 //       }return resultmap;
 //    }
-
     @ResponseBody
     @RequestMapping("/hotTop10.action")
     public Map<String,Object> hotTop10(){

@@ -275,6 +275,9 @@
             </thead>
             <tbody>
 
+
+
+
             </tbody>
         </table>
         <div id="swiper" class="swiper-container">
@@ -395,7 +398,6 @@
             $("#user_name").text(data)
         }, "text");
 
-
         $.ajax({
             url:"showUid.action",
             dataType:"text",
@@ -406,17 +408,6 @@
             }
         })
 
-        // $.ajax({
-        //     url:"showUid.action",
-        //     dataType:"text",
-        //     type:"post",
-        //     async:false,
-        // }).done(function (data) {
-        //     console.log("data="+data);
-        //     uid = data;
-        // }).fail(function () {
-        //
-        // });
 
         $.post("hotTop10.action", function (data) {
            // console.log(data)
@@ -460,6 +451,7 @@
             },"json");
 
         })
+
 
         $("#showByName").focus(function () {
             var swiper = document.getElementById("swiper");
